@@ -14,7 +14,7 @@ export default function Home() {
             .then(data => setItems(data));
     }, [])
 
-    const mouseMove = (event) => {
+    const mouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
         const card = event.currentTarget;
         const rect = card.getBoundingClientRect();
         const x = event.nativeEvent.offsetX; // ✅ use offsetX/offsetY (position within the card)
@@ -24,7 +24,7 @@ export default function Home() {
         card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
     }
 
-    const mouseLeave = (event) => {
+    const mouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
         const card = event.currentTarget;
         card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
     }
