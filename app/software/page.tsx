@@ -16,12 +16,12 @@ import comicpeepsMono from "@/public/projects/comicpeeps-mono.svg";
 import comicpeeps from "@/public/projects/comicpeeps.svg";
 
 export default function Home() {
-    const handleMouseEnter = (event) => {
-        event.target.classList.add("colored");
+    const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+        (event.target as HTMLDivElement).classList.add("colored");
     };
 
-    const handleMouseLeave = (event) => {
-        event.target.classList.remove("colored");
+    const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+        (event.target as HTMLDivElement).classList.remove("colored");
     };
 
     return (
