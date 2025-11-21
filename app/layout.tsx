@@ -46,6 +46,7 @@ export default function RootLayout({
             <meta property="twitter:image:alt" content="crxssed logo" />
             <meta name="twitter:card" content="summary_large_image" />
 
+            <script src="https://hardcoverembed.gouthamve.dev/static/widget.js" async></script>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
         </head>
 
