@@ -146,7 +146,7 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="card">
                                 <Link href="/fun-zone/rankings/tv">
                                     <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/avatar.jpg')"}}>
