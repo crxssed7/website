@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/Header";
 import { useEffect, useState } from "react";
-import { faCrown, faChessQueen, faScroll } from "@fortawesome/free-solid-svg-icons";
+import { faCrown, faChessQueen, faScroll, faChessKnight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
@@ -146,37 +146,50 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="card">
-                            <Link href="/fun-zone/rankings/tv">
-                                <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/avatar.jpg')"}}>
-                                    <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
-                                    <FontAwesomeIcon icon={faCrown} className="text-lg"></FontAwesomeIcon>
-                                    <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KINGS</h2>
-                                    <small className="tracking-wider text-center">TV shows that I recommend ranked by my personal prefences.</small>
-                                </div>
-                            </Link>
-                        </div>
+                        <div className="grid grid-cols-2 gap-8">
+                            <div className="card">
+                                <Link href="/fun-zone/rankings/tv">
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/avatar.jpg')"}}>
+                                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+                                        <FontAwesomeIcon icon={faCrown} className="text-lg"></FontAwesomeIcon>
+                                        <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KINGS</h2>
+                                        <small className="tracking-wider text-center">TV shows that I recommend ranked by my personal prefences.</small>
+                                    </div>
+                                </Link>
+                            </div>
 
-                        <div className="card">
-                            <Link href="/fun-zone/rankings/movies">
-                                <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/across-the-spider-verse.jpg')"}}>
-                                    <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
-                                    <FontAwesomeIcon icon={faChessQueen} className="text-lg"></FontAwesomeIcon>
-                                    <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF QUEENS</h2>
-                                    <small className="tracking-wider text-center">Movies that I recommend ranked by my personal prefences.</small>
-                                </div>
-                            </Link>
-                        </div>
+                            <div className="card">
+                                <Link href="/fun-zone/rankings/movies">
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/across-the-spider-verse.jpg')"}}>
+                                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+                                        <FontAwesomeIcon icon={faChessQueen} className="text-lg"></FontAwesomeIcon>
+                                        <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF QUEENS</h2>
+                                        <small className="tracking-wider text-center">Movies that I recommend ranked by my personal prefences.</small>
+                                    </div>
+                                </Link>
+                            </div>
 
-                        <div className="card">
-                            <Link href="/fun-zone/rankings/manga">
-                                <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/spy-x-family.jpg')"}}>
-                                    <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
-                                    <FontAwesomeIcon icon={faScroll} className="text-lg"></FontAwesomeIcon>
-                                    <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF SCRIBES</h2>
-                                    <small className="tracking-wider text-center">Manga that I recommend ranked by my personal prefences.</small>
-                                </div>
-                            </Link>
+                            <div className="card">
+                                <Link href="/fun-zone/rankings/manga">
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/spy-x-family.jpg')"}}>
+                                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+                                        <FontAwesomeIcon icon={faScroll} className="text-lg"></FontAwesomeIcon>
+                                        <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF SCRIBES</h2>
+                                        <small className="tracking-wider text-center">Manga that I recommend ranked by my personal prefences.</small>
+                                    </div>
+                                </Link>
+                            </div>
+
+                            <div className="card">
+                                <Link href="/fun-zone/rankings/games">
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/minecraft.jpg')"}}>
+                                        <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+                                        <FontAwesomeIcon icon={faChessKnight} className="text-lg"></FontAwesomeIcon>
+                                        <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KNIGHTS</h2>
+                                        <small className="tracking-wider text-center">Games that I recommend ranked by my personal prefences.</small>
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
