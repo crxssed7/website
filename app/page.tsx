@@ -7,12 +7,12 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons/faFilePdf";
 import { Header } from "@/components/Header";
 
 export default function Home() {
-    const handleMouseEnter = (event) => {
-        event.target.classList.add("colored");
+    const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+        (event.target as HTMLDivElement).classList.add("colored");
     };
 
-    const handleMouseLeave = (event) => {
-        event.target.classList.remove("colored");
+    const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+        (event.target as HTMLDivElement).classList.remove("colored");
     };
 
     return (
