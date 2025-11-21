@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 export default function Home() {
-    const [quote, setQuote] = useState(undefined);
-    const [author, setAuthor] = useState(undefined);
+    const [quote, setQuote] = useState<string | undefined>(undefined);
+    const [author, setAuthor] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         new HardcoverWidget(
