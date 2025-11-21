@@ -5,8 +5,14 @@ import { faScroll } from "@fortawesome/free-solid-svg-icons/faScroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
+type Item = {
+    id: string;
+    title: {english: string};
+    coverImage: {large: string};
+}
+
 export default function Home() {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<Item[]>([]);
 
     useEffect(() => {
         fetch("https://albert.crxssed.dev/api/anilist/favourites/crxssed")
@@ -14,7 +20,7 @@ export default function Home() {
             .then(data => setItems(data));
     }, [])
 
-    const mouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const mouseMove = (event: React.MouseEvent<HTMLAnchorElement>) => {
         const card = event.currentTarget;
         const rect = card.getBoundingClientRect();
         const x = event.nativeEvent.offsetX; // ✅ use offsetX/offsetY (position within the card)
@@ -24,7 +30,7 @@ export default function Home() {
         card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
     }
 
-    const mouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+    const mouseLeave = (event: React.MouseEvent<HTMLAnchorElement>) => {
         const card = event.currentTarget;
         card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
     }
