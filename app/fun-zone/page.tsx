@@ -1,7 +1,6 @@
 'use client'
 
 import { Header } from "@/components/Header";
-import Head from 'next/head'
 import { useEffect, useState } from "react";
 import { faCrown, faChessQueen, faScroll } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,9 +68,6 @@ export default function Home() {
 
     return (
         <>
-            <Head>
-                <script src="https://hardcoverembed.gouthamve.dev/static/widget.js" async></script>
-            </Head>
             <Header selectedPage="fun-zone"></Header>
             <div className="max-w-7xl w-full mx-auto px-4 pb-6">
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
