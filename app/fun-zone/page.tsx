@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { faCrown, faChessQueen, faScroll, faChessKnight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { TraktWatching } from "@/components/TraktWatching";
 
 export default function Home() {
     const [quote, setQuote] = useState<string | undefined>(undefined);
@@ -70,6 +71,7 @@ export default function Home() {
         <>
             <Header selectedPage="fun-zone"></Header>
             <div className="max-w-7xl w-full mx-auto px-4 pb-6">
+                <TraktWatching />
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
                     <div className="col-span-1 flex flex-col gap-8">
                         <div className="card">
