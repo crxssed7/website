@@ -84,7 +84,7 @@ export function TraktWatching() {
     }
 
 
-    if (!traktData) return null;
+    if (!traktData || percentage <= 0) return null;
 
     return (
         <div className="relative flex flex-col gap-0 items-center justify-center w-full card-title card-border border-primary mb-8 p-2">
