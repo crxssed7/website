@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 export function ShowFinishDate() {
     const CURRENT_SHOW = "Gintama"
-    const EPISODE_COUNT = 367
+    const EPISODE_COUNT = 369
     const NUM_EPS_PER_DAY = 2
 
     const [finishDate, setFinishDate] = useState<Date | null>(null)
