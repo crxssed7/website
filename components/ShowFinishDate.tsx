@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react"
 
 export function ShowFinishDate() {
-    const CURRENT_SHOW = "Gintama"
-    const EPISODE_COUNT = 369
+    const CURRENT_SHOW = "Beelzebub"
+    const EPISODE_COUNT = 60
     const NUM_EPS_PER_DAY = 2
 
     const [finishDate, setFinishDate] = useState<Date | null>(null)
@@ -21,7 +21,7 @@ export function ShowFinishDate() {
                 };
 
                 const watchedRes = await fetch(
-                    `https://api.trakt.tv/users/crxssed/history/shows/gintama?limit=400`,
+                    `https://api.trakt.tv/users/crxssed/history/shows/beelzebub?limit=400`,
                     { headers }
                 );
 
@@ -57,7 +57,7 @@ export function ShowFinishDate() {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
-                    })} ({amountOfDays} days, ~{amountOfDays / 30} months)
+                    })} ({amountOfDays} days, ~{(amountOfDays / 30).toFixed(2)} months)
                 </strong>
             </p>
         </div>
