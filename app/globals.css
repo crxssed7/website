@@ -59,6 +59,11 @@ body {
     transform: none !important;
 }
 
+.hw-book-title-overlay {
+    font-size: 10px !important;
+    padding: 5px !important;
+}
+
 /* Rankings */
 .r-grid {
     @apply gap-8;
