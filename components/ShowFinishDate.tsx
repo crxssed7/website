@@ -11,22 +11,6 @@ export function ShowFinishDate() {
     const [episodesLeft, setEpisodesLeft] = useState<number>(0)
     const [amountOfDays, setAmountOfDays] = useState<number>(0)
 
-    function addWeekdays(start: Date, days: number): Date {
-        const date = new Date(start)
-        let remainingDays = Math.ceil(days)
-
-        while (remainingDays > 0) {
-            date.setDate(date.getDate() + 1)
-
-            const day = date.getDay()
-            if (day !== 0 && day !== 6) {
-                remainingDays--
-            }
-        }
-
-        return date
-    }
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -44,18 +28,15 @@ export function ShowFinishDate() {
                 if (!watchedRes.ok) {
                     throw new Error("Failed to fetch watched data");
                 }
-
                 const watchedHistoryItems = await watchedRes.json();
-
+                // TODO: This assumes that I watch each episode only once
                 const watchedEpisodes = watchedHistoryItems.length
                 const amountLeft = EPISODE_COUNT - watchedEpisodes
-
-                const rawDays = amountLeft / NUM_EPS_PER_DAY
-                const finish = addWeekdays(new Date(), rawDays)
-
-                setFinishDate(finish)
+                const amountOfDays = amountLeft / NUM_EPS_PER_DAY
+                const finishDate = new Date(Date.now() + amountOfDays * 24 * 60 * 60 * 1000)
+                setFinishDate(finishDate)
                 setEpisodesLeft(amountLeft)
-                setAmountOfDays(rawDays)
+                setAmountOfDays(amountOfDays)
             } catch (err) {
                 console.log(err);
             }
@@ -76,7 +57,7 @@ export function ShowFinishDate() {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
-                    })} ({amountOfDays.toFixed(1)} days, ~{(amountOfDays / 30).toFixed(2)} months)
+                    })} ({amountOfDays} days, ~{(amountOfDays / 30).toFixed(2)} months)
                 </strong>
             </p>
         </div>
