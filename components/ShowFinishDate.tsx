@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react"
 
 export function ShowFinishDate() {
-    const CURRENT_SHOW = "Beelzebub"
-    const EPISODE_COUNT = 60
+    const CURRENT_SHOW = "The Boondocks"
+    const EPISODE_COUNT = 55
     const NUM_EPS_PER_DAY = 2
 
     const [finishDate, setFinishDate] = useState<Date | null>(null)
@@ -21,7 +21,7 @@ export function ShowFinishDate() {
                 };
 
                 const watchedRes = await fetch(
-                    `https://api.trakt.tv/users/crxssed/history/shows/beelzebub?limit=400`,
+                    `https://api.trakt.tv/users/crxssed/history/shows/the-boondocks?limit=400`,
                     { headers }
                 );
 
