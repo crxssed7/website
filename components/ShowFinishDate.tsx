@@ -22,7 +22,7 @@ export function ShowFinishDate() {
 
                 const watchedRes = await fetch(
                     `https://api.trakt.tv/users/crxssed/history/shows/orb-on-the-movements-of-the-earth?limit=400`,
-                    { headers }
+                    { headers, cache: 'no-store' }
                 );
 
                 if (!watchedRes.ok) {
