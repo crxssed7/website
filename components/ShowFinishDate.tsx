@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react"
 
 export function ShowFinishDate() {
-    const CURRENT_SHOW = "The Boondocks"
-    const EPISODE_COUNT = 55
-    const NUM_EPS_PER_DAY = 2
+    const CURRENT_SHOW = "Orb: On the Movements of the Earth"
+    const EPISODE_COUNT = 25
+    const NUM_EPS_PER_DAY = 4
 
     const [finishDate, setFinishDate] = useState<Date | null>(null)
     const [episodesLeft, setEpisodesLeft] = useState<number>(0)
@@ -21,7 +21,7 @@ export function ShowFinishDate() {
                 };
 
                 const watchedRes = await fetch(
-                    `https://api.trakt.tv/users/crxssed/history/shows/the-boondocks?limit=400`,
+                    `https://api.trakt.tv/users/crxssed/history/shows/orb-on-the-movements-of-the-earth?limit=400`,
                     { headers }
                 );
 
