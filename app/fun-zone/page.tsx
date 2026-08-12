@@ -79,7 +79,7 @@ export default function Home() {
                                 <h2 className="text-2xl font-bold tracking-wider">I LAST WATCHED</h2>
                             </div>
                             <div className="card-body card-border border-t-0 border-primary p-0">
-                                <a target="_blank" href="https://trakt.tv/users/crxssed">
+                                <a target="_blank" href="https://mdblist.com/@crxssed">
                                     <img alt="crxssed" src="https://trakt-widgets.vercel.app/crxssed/watched/card-overlay" className="grayscale hover:grayscale-0" />
                                 </a>
                             </div>
@@ -127,8 +127,8 @@ export default function Home() {
                         <div className="grid grid-cols-3 gap-8">
                             <div className="card">
                                 <div className="card-title card-border border-primary justify-center w-full h-0 pb-[100%] group">
-                                    <a target="_blank" href="https://trakt.tv/users/crxssed" className="absolute top-0 flex items-center justify-center h-full w-full">
-                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://trakt.tv/assets/logos/logomark.square.gradient-b644b16c38ff775861b4b1f58c1230f6a097a2466ab33ae00445a505c33fcb91.svg" alt="Trakt" />
+                                    <a target="_blank" href="https://mdblist.com/@crxssed" className="absolute top-0 flex items-center justify-center h-full w-full">
+                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4755371/ae48914ac8244bc383cc98066d491036/eyJoIjozNjAsInciOjM2MH0%3D/2.png?token-hash=ZwSIXgMEOMvVJFigRssqbwv7HDv_jzVNxTJl4U_4NTc%3D&token-time=1787788800" alt="MDblist" />
                                     </a>
                                 </div>
                             </div>
