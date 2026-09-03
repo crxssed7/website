@@ -128,7 +128,7 @@ export default function Home() {
                             <div className="card">
                                 <div className="card-title card-border border-primary justify-center w-full h-0 pb-[100%] group">
                                     <a target="_blank" href="https://mdblist.com/@crxssed" className="absolute top-0 flex items-center justify-center h-full w-full">
-                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4755371/ae48914ac8244bc383cc98066d491036/eyJoIjozNjAsInciOjM2MH0%3D/2.png?token-hash=ZwSIXgMEOMvVJFigRssqbwv7HDv_jzVNxTJl4U_4NTc%3D&token-time=1787788800" alt="MDblist" />
+                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://mdblist.com/static/mdblist_logo.png" alt="MDblist" />
                                     </a>
                                 </div>
                             </div>
