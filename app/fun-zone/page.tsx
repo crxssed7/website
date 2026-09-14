@@ -142,7 +142,7 @@ export default function Home() {
                             <div className="card">
                                 <div className="card-title card-border border-primary justify-center w-full h-0 pb-[100%] group">
                                     <a target="_blank" href="https://www.exophase.com/user/crxssed/" className="absolute top-0 flex items-center justify-center h-full w-full">
-                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://d4.alternativeto.net/ldyWcYEWxk9uDNm0ZFQ_IGYAwLFPCd2uK4gHr1fsaNw/rs:fit:140:140:ce/aHR0cHM6Ly9zdGF0aWMuZXhvcGhhc2UuY29tL2V4b3BoYXNlL2V4b3BoYXNlLmljbw" alt="Exophase" />
+                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://img.alternativeto.net/icons/140/jpeg/exophase_206340.png" alt="Exophase" />
                                     </a>
                                 </div>
                             </div>
