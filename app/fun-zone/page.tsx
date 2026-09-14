@@ -151,7 +151,7 @@ export default function Home() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="card">
                                 <Link href="/fun-zone/rankings/tv">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: `url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=500&h=500&fit=crop')`}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/avatar.jpg')"}}>
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faCrown} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KINGS</h2>
@@ -162,7 +162,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/movies">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: `url('https://images.unsplash.com/photo-1489599849228-ed4dc6900659?w=500&h=500&fit=crop')`}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/across-the-spider-verse.jpg')"}}>
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faChessQueen} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF QUEENS</h2>
@@ -173,7 +173,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/manga">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: `url('https://images.unsplash.com/photo-1536375072261-38c75010e6c9?w=500&h=500&fit=crop')`}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/spy-x-family.jpg')"}}>
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faScroll} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF SCRIBES</h2>
@@ -184,7 +184,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/games">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: `url('https://images.unsplash.com/photo-1538481143235-259f5ff32442?w=500&h=500&fit=crop')`}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/minecraft.jpg')"}}>
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faChessKnight} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KNIGHTS</h2>
