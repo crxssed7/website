@@ -74,7 +74,7 @@ export default function Home() {
                 <TraktWatching />
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
                     <div className="col-span-1 flex flex-col gap-8">
-                        <div className="card">
+                        {/* <div className="card">
                             <div className="card-title card-border border-primary justify-center p-6">
                                 <h2 className="text-2xl font-bold tracking-wider">I LAST WATCHED</h2>
                             </div>
@@ -92,7 +92,7 @@ export default function Home() {
                             <div className="card-body card-border border-t-0 border-primary p-0">
                                 <div id="my-books" className="p-0! m-0!"></div>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="card">
                             <div className="card-title card-border border-primary justify-center p-6">
@@ -142,7 +142,7 @@ export default function Home() {
                             <div className="card">
                                 <div className="card-title card-border border-primary justify-center w-full h-0 pb-[100%] group">
                                     <a target="_blank" href="https://www.exophase.com/user/crxssed/" className="absolute top-0 flex items-center justify-center h-full w-full">
-                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://d4.alternativeto.net/ldyWcYEWxk9uDNm0ZFQ_IGYAwLFPCd2uK4gHr1fsaNw/rs:fit:140:140:0/g:ce:0:0/exar:1/YWJzOi8vZGlzdC9pY29ucy9leG9waGFzZV8yMDYzNDAucG5n.png" alt="Exophase" />
+                                        <img className="my-auto max-h-20 grayscale group-hover:grayscale-0" src="https://d4.alternativeto.net/ldyWcYEWxk9uDNm0ZFQ_IGYAwLFPCd2uK4gHr1fsaNw/rs:fit:140:140[...]
                                     </a>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ export default function Home() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="card">
                                 <Link href="/fun-zone/rankings/tv">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/avatar.jpg')"}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" sty[...]
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faCrown} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KINGS</h2>
@@ -162,7 +162,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/movies">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/across-the-spider-verse.jpg')"}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" sty[...]
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faChessQueen} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF QUEENS</h2>
@@ -173,7 +173,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/manga">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/spy-x-family.jpg')"}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" sty[...]
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faScroll} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF SCRIBES</h2>
@@ -184,7 +184,7 @@ export default function Home() {
 
                             <div className="card">
                                 <Link href="/fun-zone/rankings/games">
-                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" style={{backgroundImage: "url('/fun-zone/minecraft.jpg')"}}>
+                                    <div className="relative card-title card-border border-primary justify-center min-h-80 flex-col bg-cover bg-center bg-no-repeat grayscale-100 hover:grayscale-0" sty[...]
                                         <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
                                         <FontAwesomeIcon icon={faChessKnight} className="text-lg"></FontAwesomeIcon>
                                         <h2 className="text-2xl font-bold tracking-wider uppercase text-center">RANKING OF KNIGHTS</h2>
