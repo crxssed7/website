@@ -12,20 +12,20 @@ export default function Home() {
     const [author, setAuthor] = useState<string | undefined>(undefined);
 
     useEffect(() => {
-        new HardcoverWidget(
-            document.getElementById('my-books'),
-            {
-                apiUrl: 'https://hardcoverembed.gouthamve.dev',
-                username: 'crxssed',
-                bookType: 'currently-reading',
-                maxWidth: '100%',
-                minColumnWidth: 0,
-                gap: 0,
-                padding: 0,
-                columns: 4,
-                showPoweredBy: false
-            }
-        );
+        // new HardcoverWidget(
+        //     document.getElementById('my-books'),
+        //     {
+        //         apiUrl: 'https://hardcoverembed.gouthamve.dev',
+        //         username: 'crxssed',
+        //         bookType: 'currently-reading',
+        //         maxWidth: '100%',
+        //         minColumnWidth: 0,
+        //         gap: 0,
+        //         padding: 0,
+        //         columns: 4,
+        //         showPoweredBy: false
+        //     }
+        // );
 
         const quotes = [
             "Ooohhhhhhhhh!!!!!^- Regular Show",
