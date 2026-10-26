@@ -70,8 +70,17 @@ function getShowStats(show: ShowData) {
     }
 }
 
+function formatDate(date: Date) {
+    return date.toLocaleDateString(undefined, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+    })
+}
+
 export function ShowFinishDate() {
     const [shows, setShows] = useState<ShowData[]>([])
+    const [expandedIds, setExpandedIds] = useState<string[]>([])
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
@@ -80,8 +89,6 @@ export function ShowFinishDate() {
 
             if (saved) {
                 const parsed = JSON.parse(saved)
-
-                // Support both the old single-show format and the new array.
                 const savedShows = Array.isArray(parsed) ? parsed : [parsed]
 
                 setShows(
@@ -90,10 +97,14 @@ export function ShowFinishDate() {
                     )
                 )
             } else {
-                setShows([createShow()])
+                const initialShow = createShow()
+                setShows([initialShow])
+                setExpandedIds([initialShow.id])
             }
         } catch {
-            setShows([createShow()])
+            const initialShow = createShow()
+            setShows([initialShow])
+            setExpandedIds([initialShow.id])
         } finally {
             setLoaded(true)
         }
@@ -122,11 +133,24 @@ export function ShowFinishDate() {
     }
 
     function addShow() {
-        setShows((current) => [...current, createShow()])
+        const show = createShow()
+        setShows((current) => [...current, show])
+        setExpandedIds((current) => [...current, show.id])
     }
 
     function removeShow(id: string) {
         setShows((current) => current.filter((show) => show.id !== id))
+        setExpandedIds((current) =>
+            current.filter((expandedId) => expandedId !== id)
+        )
+    }
+
+    function toggleShow(id: string) {
+        setExpandedIds((current) =>
+            current.includes(id)
+                ? current.filter((expandedId) => expandedId !== id)
+                : [...current, id]
+        )
     }
 
     const inputStyle = {
@@ -155,8 +179,7 @@ export function ShowFinishDate() {
         background: "#20212b",
         border: "1px solid #343541",
         borderRadius: "16px",
-        padding: "18px",
-        minWidth: 0,
+        overflow: "hidden" as const,
     }
 
     return (
@@ -286,324 +309,390 @@ export function ShowFinishDate() {
                     </button>
                 </div>
             ) : (
-                <div style={{ display: "grid", gap: "18px" }}>
+                <div style={{ display: "grid", gap: "12px" }}>
                     {shows.map((show, index) => {
                         const stats = getShowStats(show)
+                        const expanded = expandedIds.includes(show.id)
 
-                        const formattedDate =
-                            stats.finishDate.toLocaleDateString(undefined, {
-                                weekday: "short",
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            })
+                        const summaryDate = stats.valid
+                            ? stats.remaining === 0
+                                ? "Completed"
+                                : formatDate(stats.finishDate)
+                            : "Enter show details"
 
                         return (
-                            <article
-                                key={show.id}
-                                style={{
-                                    ...cardStyle,
-                                    padding: "18px",
-                                }}
-                            >
-                                <header
+                            <article key={show.id} style={cardStyle}>
+                                {/* Always-visible summary / accordion trigger */}
+                                <button
+                                    type="button"
+                                    onClick={() => toggleShow(show.id)}
+                                    aria-expanded={expanded}
+                                    aria-controls={`details-${show.id}`}
                                     style={{
                                         display: "flex",
-                                        justifyContent: "space-between",
                                         alignItems: "center",
-                                        gap: "12px",
-                                        marginBottom: "20px",
+                                        gap: "14px",
+                                        width: "100%",
+                                        padding: "17px",
+                                        border: "none",
+                                        background: expanded
+                                            ? "#272532"
+                                            : "transparent",
+                                        color: "#f5f5f7",
+                                        textAlign: "left",
+                                        cursor: "pointer",
+                                        fontFamily: "inherit",
                                     }}
                                 >
                                     <span
-                                        style={{
-                                            color: "#b6aaff",
-                                            fontSize: "11px",
-                                            fontWeight: 700,
-                                            textTransform: "uppercase",
-                                            letterSpacing: "0.08em",
-                                        }}
-                                    >
-                                        Show {index + 1}
-                                    </span>
-
-                                    <button
-                                        type="button"
-                                        onClick={() => removeShow(show.id)}
-                                        aria-label={`Remove ${show.name || `show ${index + 1}`}`}
-                                        title="Remove show"
-                                        style={{
-                                            border: "1px solid #45404c",
-                                            borderRadius: "8px",
-                                            background: "transparent",
-                                            color: "#b9a9bd",
-                                            padding: "7px 10px",
-                                            fontSize: "12px",
-                                            cursor: "pointer",
-                                        }}
-                                    >
-                                        Remove ×
-                                    </button>
-                                </header>
-
-                                <div style={{ marginBottom: "18px" }}>
-                                    <label
-                                        htmlFor={`name-${show.id}`}
-                                        style={labelStyle}
-                                    >
-                                        Show name
-                                    </label>
-                                    <input
-                                        id={`name-${show.id}`}
-                                        type="text"
-                                        placeholder="e.g. Orb: On the Movements of the Earth"
-                                        value={show.name}
-                                        onChange={(e) =>
-                                            updateShow(
-                                                show.id,
-                                                "name",
-                                                e.target.value
-                                            )
-                                        }
-                                        style={inputStyle}
-                                    />
-                                </div>
-
-                                <div
-                                    style={{
-                                        display: "grid",
-                                        gridTemplateColumns:
-                                            "repeat(2, minmax(0, 1fr))",
-                                        gap: "12px",
-                                    }}
-                                >
-                                    <div>
-                                        <label
-                                            htmlFor={`total-${show.id}`}
-                                            style={labelStyle}
-                                        >
-                                            Total episodes
-                                        </label>
-                                        <input
-                                            id={`total-${show.id}`}
-                                            type="number"
-                                            min="1"
-                                            step="1"
-                                            value={show.episodeCount}
-                                            onChange={(e) =>
-                                                updateShow(
-                                                    show.id,
-                                                    "episodeCount",
-                                                    e.target.value
-                                                )
-                                            }
-                                            style={inputStyle}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            htmlFor={`watched-${show.id}`}
-                                            style={labelStyle}
-                                        >
-                                            Last watched
-                                        </label>
-                                        <input
-                                            id={`watched-${show.id}`}
-                                            type="number"
-                                            min="0"
-                                            max={show.episodeCount}
-                                            step="1"
-                                            value={show.lastEpisodeWatched}
-                                            onChange={(e) =>
-                                                updateShow(
-                                                    show.id,
-                                                    "lastEpisodeWatched",
-                                                    e.target.value
-                                                )
-                                            }
-                                            style={inputStyle}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div style={{ marginTop: "16px" }}>
-                                    <label
-                                        htmlFor={`pace-${show.id}`}
-                                        style={labelStyle}
-                                    >
-                                        Episodes per day
-                                    </label>
-                                    <input
-                                        id={`pace-${show.id}`}
-                                        type="number"
-                                        min="0.1"
-                                        step="any"
-                                        value={show.episodesPerDay}
-                                        onChange={(e) =>
-                                            updateShow(
-                                                show.id,
-                                                "episodesPerDay",
-                                                e.target.value
-                                            )
-                                        }
-                                        style={inputStyle}
-                                    />
-                                </div>
-
-                                <div
-                                    style={{
-                                        marginTop: "22px",
-                                        padding: "15px",
-                                        borderRadius: "12px",
-                                        background: "#191a23",
-                                        border: "1px solid #343541",
-                                    }}
-                                >
-                                    <div
+                                        aria-hidden="true"
                                         style={{
                                             display: "flex",
-                                            justifyContent: "space-between",
                                             alignItems: "center",
-                                            gap: "10px",
-                                            marginBottom: "10px",
+                                            justifyContent: "center",
+                                            flexShrink: 0,
+                                            width: "34px",
+                                            height: "34px",
+                                            borderRadius: "10px",
+                                            background: "#343047",
+                                            color: "#b6aaff",
+                                            fontSize: "15px",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        {index + 1}
+                                    </span>
+
+                                    <span
+                                        style={{
+                                            display: "block",
+                                            flex: 1,
+                                            minWidth: 0,
                                         }}
                                     >
                                         <span
                                             style={{
-                                                fontSize: "12px",
-                                                fontWeight: 600,
-                                                color: "#c1c1cf",
+                                                display: "block",
+                                                fontSize: "14px",
+                                                fontWeight: 700,
+                                                lineHeight: 1.4,
+                                                overflowWrap: "anywhere",
                                             }}
                                         >
-                                            Progress
+                                            {show.name.trim() ||
+                                                "Untitled show"}
                                         </span>
+
                                         <span
                                             style={{
-                                                fontSize: "12px",
-                                                fontWeight: 700,
-                                                color: "#b6aaff",
+                                                display: "block",
+                                                marginTop: "4px",
+                                                color: "#a4a5b5",
+                                                fontSize: "11px",
                                             }}
                                         >
                                             {stats.valid
-                                                ? `${stats.progress.toFixed(0)}%`
-                                                : "—"}
+                                                ? `${stats.watched}/${stats.total} episodes · ${stats.remaining} left`
+                                                : "Incomplete details"}
                                         </span>
-                                    </div>
 
-                                    <div
+                                        <span
+                                            style={{
+                                                display: "block",
+                                                marginTop: "9px",
+                                                height: "4px",
+                                                background: "#3a3947",
+                                                borderRadius: "99px",
+                                                overflow: "hidden",
+                                            }}
+                                        >
+                                            <span
+                                                style={{
+                                                    display: "block",
+                                                    width: `${stats.valid ? stats.progress : 0}%`,
+                                                    height: "100%",
+                                                    borderRadius: "99px",
+                                                    background:
+                                                        "linear-gradient(90deg, #8171ff, #b6aaff)",
+                                                }}
+                                            />
+                                        </span>
+                                    </span>
+
+                                    <span
                                         style={{
-                                            height: "7px",
-                                            background: "#343541",
-                                            borderRadius: "99px",
-                                            overflow: "hidden",
+                                            flexShrink: 0,
+                                            textAlign: "right",
+                                            maxWidth: "105px",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                display: "block",
+                                                color: "#b6aaff",
+                                                fontSize: "11px",
+                                                fontWeight: 700,
+                                                lineHeight: 1.5,
+                                            }}
+                                        >
+                                            {summaryDate}
+                                        </span>
+                                        {stats.valid && (
+                                            <span
+                                                style={{
+                                                    display: "block",
+                                                    marginTop: "4px",
+                                                    color: "#898a9b",
+                                                    fontSize: "10px",
+                                                }}
+                                            >
+                                                {stats.remaining === 0
+                                                    ? "All caught up"
+                                                    : `${stats.days} day${stats.days === 1 ? "" : "s"} left`}
+                                            </span>
+                                        )}
+                                    </span>
+
+                                    <span
+                                        aria-hidden="true"
+                                        style={{
+                                            flexShrink: 0,
+                                            color: "#898a9b",
+                                            fontSize: "14px",
+                                            transform: expanded
+                                                ? "rotate(180deg)"
+                                                : "rotate(0deg)",
+                                            transition: "transform 180ms ease",
+                                        }}
+                                    >
+                                        ▾
+                                    </span>
+                                </button>
+
+                                {expanded && (
+                                    <div
+                                        id={`details-${show.id}`}
+                                        style={{
+                                            padding: "18px",
+                                            borderTop: "1px solid #343541",
                                         }}
                                     >
                                         <div
                                             style={{
-                                                width: `${stats.valid ? stats.progress : 0}%`,
-                                                height: "100%",
-                                                borderRadius: "99px",
-                                                background:
-                                                    "linear-gradient(90deg, #8171ff, #b6aaff)",
-                                                transition: "width 200ms ease",
-                                            }}
-                                        />
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            gap: "10px",
-                                            marginTop: "9px",
-                                            color: "#898a9b",
-                                            fontSize: "11px",
-                                        }}
-                                    >
-                                        <span>
-                                            {stats.valid
-                                                ? `${stats.watched} watched`
-                                                : "—"}
-                                        </span>
-                                        <span>
-                                            {stats.valid
-                                                ? `${stats.remaining} remaining`
-                                                : "—"}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div
-                                    style={{
-                                        marginTop: "12px",
-                                        padding: "17px",
-                                        borderRadius: "12px",
-                                        background:
-                                            "linear-gradient(145deg, #28233e, #20212b)",
-                                        border: "1px solid #494064",
-                                    }}
-                                >
-                                    {!stats.valid ? (
-                                        <p
-                                            style={{
-                                                color: "#c1c1cf",
-                                                fontSize: "12px",
-                                                lineHeight: 1.6,
-                                                margin: 0,
+                                                display: "flex",
+                                                justifyContent: "flex-end",
+                                                marginBottom: "16px",
                                             }}
                                         >
-                                            Enter a name, valid episode counts,
-                                            and a positive viewing pace to
-                                            calculate your finish date.
-                                        </p>
-                                    ) : (
-                                        <>
-                                            <p
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    removeShow(show.id)
+                                                }
                                                 style={{
-                                                    margin: "0 0 6px",
-                                                    color: "#b6aaff",
-                                                    fontSize: "11px",
-                                                    fontWeight: 700,
-                                                    textTransform: "uppercase",
-                                                    letterSpacing: "0.07em",
-                                                }}
-                                            >
-                                                {stats.remaining === 0
-                                                    ? "Series complete"
-                                                    : "Estimated finish date"}
-                                            </p>
-
-                                            <h3
-                                                style={{
-                                                    margin: "0 0 7px",
-                                                    fontSize:
-                                                        "clamp(19px, 4vw, 25px)",
-                                                    lineHeight: 1.35,
-                                                    letterSpacing: "-0.03em",
-                                                    overflowWrap: "anywhere",
-                                                }}
-                                            >
-                                                {stats.remaining === 0
-                                                    ? "You've made it!"
-                                                    : formattedDate}
-                                            </h3>
-
-                                            <p
-                                                style={{
-                                                    margin: 0,
-                                                    color: "#c1c1cf",
+                                                    border: "1px solid #45404c",
+                                                    borderRadius: "8px",
+                                                    background: "transparent",
+                                                    color: "#b9a9bd",
+                                                    padding: "7px 10px",
                                                     fontSize: "12px",
-                                                    lineHeight: 1.6,
+                                                    cursor: "pointer",
                                                 }}
                                             >
-                                                {stats.remaining === 0
-                                                    ? `${show.name} is all caught up.`
-                                                    : `${stats.remaining} episode${stats.remaining === 1 ? "" : "s"} left · ${stats.days} day${stats.days === 1 ? "" : "s"} at ${stats.perDay} per day`}
-                                            </p>
-                                        </>
-                                    )}
-                                </div>
+                                                Remove show ×
+                                            </button>
+                                        </div>
+
+                                        <div style={{ marginBottom: "18px" }}>
+                                            <label
+                                                htmlFor={`name-${show.id}`}
+                                                style={labelStyle}
+                                            >
+                                                Show name
+                                            </label>
+                                            <input
+                                                id={`name-${show.id}`}
+                                                type="text"
+                                                placeholder="e.g. Orb: On the Movements of the Earth"
+                                                value={show.name}
+                                                onChange={(e) =>
+                                                    updateShow(
+                                                        show.id,
+                                                        "name",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                style={inputStyle}
+                                            />
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                display: "grid",
+                                                gridTemplateColumns:
+                                                    "repeat(2, minmax(0, 1fr))",
+                                                gap: "12px",
+                                            }}
+                                        >
+                                            <div>
+                                                <label
+                                                    htmlFor={`total-${show.id}`}
+                                                    style={labelStyle}
+                                                >
+                                                    Total episodes
+                                                </label>
+                                                <input
+                                                    id={`total-${show.id}`}
+                                                    type="number"
+                                                    min="1"
+                                                    step="1"
+                                                    value={show.episodeCount}
+                                                    onChange={(e) =>
+                                                        updateShow(
+                                                            show.id,
+                                                            "episodeCount",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    style={inputStyle}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    htmlFor={`watched-${show.id}`}
+                                                    style={labelStyle}
+                                                >
+                                                    Last watched
+                                                </label>
+                                                <input
+                                                    id={`watched-${show.id}`}
+                                                    type="number"
+                                                    min="0"
+                                                    max={show.episodeCount}
+                                                    step="1"
+                                                    value={
+                                                        show.lastEpisodeWatched
+                                                    }
+                                                    onChange={(e) =>
+                                                        updateShow(
+                                                            show.id,
+                                                            "lastEpisodeWatched",
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    style={inputStyle}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div style={{ marginTop: "16px" }}>
+                                            <label
+                                                htmlFor={`pace-${show.id}`}
+                                                style={labelStyle}
+                                            >
+                                                Episodes per day
+                                            </label>
+                                            <input
+                                                id={`pace-${show.id}`}
+                                                type="number"
+                                                min="0.1"
+                                                step="any"
+                                                value={show.episodesPerDay}
+                                                onChange={(e) =>
+                                                    updateShow(
+                                                        show.id,
+                                                        "episodesPerDay",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                style={inputStyle}
+                                            />
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                marginTop: "20px",
+                                                padding: "16px",
+                                                borderRadius: "12px",
+                                                background:
+                                                    "linear-gradient(145deg, #28233e, #20212b)",
+                                                border: "1px solid #494064",
+                                            }}
+                                        >
+                                            {!stats.valid ? (
+                                                <p
+                                                    style={{
+                                                        color: "#c1c1cf",
+                                                        fontSize: "12px",
+                                                        lineHeight: 1.6,
+                                                        margin: 0,
+                                                    }}
+                                                >
+                                                    Enter a name, valid episode
+                                                    counts, and a positive
+                                                    viewing pace to calculate
+                                                    your finish date.
+                                                </p>
+                                            ) : (
+                                                <>
+                                                    <p
+                                                        style={{
+                                                            margin: "0 0 6px",
+                                                            color: "#b6aaff",
+                                                            fontSize: "11px",
+                                                            fontWeight: 700,
+                                                            textTransform:
+                                                                "uppercase",
+                                                            letterSpacing:
+                                                                "0.07em",
+                                                        }}
+                                                    >
+                                                        {stats.remaining === 0
+                                                            ? "Series complete"
+                                                            : "Estimated finish date"}
+                                                    </p>
+
+                                                    <h3
+                                                        style={{
+                                                            margin: "0 0 7px",
+                                                            fontSize: "24px",
+                                                            lineHeight: 1.35,
+                                                            letterSpacing:
+                                                                "-0.03em",
+                                                        }}
+                                                    >
+                                                        {stats.remaining === 0
+                                                            ? "You've made it!"
+                                                            : stats.finishDate.toLocaleDateString(
+                                                                  undefined,
+                                                                  {
+                                                                      weekday:
+                                                                          "short",
+                                                                      day: "numeric",
+                                                                      month: "long",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )}
+                                                    </h3>
+
+                                                    <p
+                                                        style={{
+                                                            margin: 0,
+                                                            color: "#c1c1cf",
+                                                            fontSize: "12px",
+                                                            lineHeight: 1.6,
+                                                        }}
+                                                    >
+                                                        {stats.remaining === 0
+                                                            ? `${show.name} is all caught up.`
+                                                            : `${stats.remaining} episode${stats.remaining === 1 ? "" : "s"} left · ${stats.days} day${stats.days === 1 ? "" : "s"} at ${stats.perDay} per day`}
+                                                    </p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </article>
                         )
                     })}
